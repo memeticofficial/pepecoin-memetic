@@ -26,19 +26,16 @@ LIBS += \
 
 # for boost 1.37, add -mt to the boost libraries
 LIBS += \
- -Wl,-Bstatic \
+ -Wl,-B$(LMODE) \
    -l boost_system$(BOOST_LIB_SUFFIX) \
    -l boost_filesystem$(BOOST_LIB_SUFFIX) \
    -l boost_program_options$(BOOST_LIB_SUFFIX) \
    -l boost_thread$(BOOST_LIB_SUFFIX) \
    -l boost_chrono$(BOOST_LIB_SUFFIX) \
- -Wl,-Bdynamic \
-   -l ssl \
-   -l crypto \
    -l db_cxx$(BDB_LIB_SUFFIX) \
+   -l ssl \
    -l gmp \
-   -l pthread \
-   -l dl
+   -l crypto
 
 ifndef USE_UPNP
 	override USE_UPNP = -
@@ -99,15 +96,12 @@ endif
 
 # CXXFLAGS can be specified on the make command line, so we use xCXXFLAGS that only
 # adds some defaults in front. Unfortunately, CXXFLAGS=... $(CXXFLAGS) does not work.
-xCXXFLAGS=-std=c++11 -O2 $(EXT_OPTIONS) -pthread -Wall -Wextra -Wno-ignored-qualifiers -Wformat -Wformat-security -Wno-unused-parameter -Wunused-function -Wunused-variable -fpermissive -Wconversion-null\
+xCXXFLAGS=-O2 $(EXT_OPTIONS) -pthread -Wall -Wextra -Wno-ignored-qualifiers -Wformat -Wformat-security -Wno-unused-parameter -Wunused-function -Wunused-variable -fpermissive -Wconversion-null\
     $(DEBUGFLAGS) $(DEFS) $(HARDENING) $(CXXFLAGS)
 
 # LDFLAGS can be specified on the make command line, so we use xLDFLAGS that only
 # adds some defaults in front. Unfortunately, LDFLAGS=... $(LDFLAGS) does not work.
-# -no-pie: Ubuntu's gcc defaults to building PIE executables, but the bundled
-# leveldb/secp256k1 static objects are not position-independent; this codebase
-# always treated PIE as opt-in (see the `ifdef PIE` block above).
-xLDFLAGS=$(LDHARDENING) -no-pie $(LDFLAGS)
+xLDFLAGS=$(LDHARDENING) $(LDFLAGS)
 
 OBJS= \
     obj/alert.o \
@@ -191,9 +185,9 @@ all: pepecoind
 
 # build secp256k1
 DEFS += $(addprefix -I,$(CURDIR)/secp256k1/include)
-secp256k1/secp256k1_pic.o:
-	@echo "Building Secp256k1 ..."; cd secp256k1; chmod 755 *; ./autogen.sh; ./configure --enable-module-recovery; make src/ecmult_static_context.h; gcc -DHAVE_CONFIG_H -I. -Isrc -Iinclude -fPIC -O2 -g -std=c89 -c src/secp256k1.c -o secp256k1_pic.o; cd ..;
-pepecoind: secp256k1/secp256k1_pic.o
+secp256k1/src/libsecp256k1_la-secp256k1.o:
+	@echo "Building Secp256k1 ..."; cd secp256k1; chmod 755 *; ./autogen.sh; ./configure --enable-module-recovery; make; cd ..;
+pepecoind: secp256k1/src/libsecp256k1_la-secp256k1.o
 
 # build leveldb
 LIBS += $(CURDIR)/leveldb/libleveldb.a $(CURDIR)/leveldb/libmemenv.a
@@ -222,7 +216,6 @@ obj/scrypt-arm.o: scrypt-arm.S
 	$(CXX) -c $(xCXXFLAGS) -MMD -o $@ $<
 
 obj/%.o: %.cpp
-	@mkdir -p $(@D)
 	$(CXX) -c $(xCXXFLAGS) -MMD -MF $(@:%.o=%.d) -o $@ $<
 	@cp $(@:%.o=%.d) $(@:%.o=%.P); \
 	  sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
@@ -230,7 +223,6 @@ obj/%.o: %.cpp
 	  rm -f $(@:%.o=%.d)
 
 obj/%.o: %.c
-	@mkdir -p $(@D)
 	$(CXX) -c $(xCXXFLAGS) -fpermissive -MMD -MF $(@:%.o=%.d) -o $@ $<
 	@cp $(@:%.o=%.d) $(@:%.o=%.P); \
 	  sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
