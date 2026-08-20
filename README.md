@@ -1,10 +1,10 @@
-##Note: PepeCoin / Memetic was bridged to PepeCoin on Ethereum ERC-20 in 2023. 
+## Note: PepeCoin / Memetic was bridged to PepeCoin on Ethereum ERC-20 in 2023. 
 
-##See [https://pepecoin.io](https://pepecoin.io) and links on [https://linktr.ee/pepecoins](https://linktr.ee/pepecoins) for more information.
+## See [https://pepecoin.io](https://pepecoin.io) and links on [https://linktr.ee/pepecoins](https://linktr.ee/pepecoins) for more information.
 
-##[PepeCoin contract on Etherscan](https://etherscan.io/token/0xa9e8acf069c58aec8825542845fd754e41a9489a)
+## [PepeCoin contract on Etherscan](https://etherscan.io/token/0xa9e8acf069c58aec8825542845fd754e41a9489a)
 
-###Find us at [https://x.com/pepecoins](https://t.me/pepecoins) and [https://x.com/pepecoins](https://x.com/pepecoins)
+### Find us at [https://x.com/pepecoins](https://t.me/pepecoins) and [https://x.com/pepecoins](https://x.com/pepecoins)
 
 ***
 ***
