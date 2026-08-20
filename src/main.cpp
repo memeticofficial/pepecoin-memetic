@@ -18,6 +18,11 @@
 #include <boost/filesystem/fstream.hpp>
 #include <boost/lexical_cast.hpp>
 
+// Boost >= 1.73 moved the bind placeholders (_1.._9) out of the global
+// namespace; restore the classic global names used throughout this code.
+#include <boost/bind/placeholders.hpp>
+using namespace boost::placeholders;
+
 #include "alert.h"
 #include "chainparams.h"
 #include "checkpoints.h"

@@ -24,6 +24,11 @@
 #include "main.h"
 #include "util.h"
 
+// Boost >= 1.73 moved the bind placeholders (_1.._9) out of the global
+// namespace; restore the classic global names used throughout this code.
+#include <boost/bind/placeholders.hpp>
+using namespace boost::placeholders;
+
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/numeric/ublas/matrix.hpp>

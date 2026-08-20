@@ -18,6 +18,11 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/asio.hpp>
+
+// Boost >= 1.73 moved the bind placeholders (_1.._9) out of the global
+// namespace; restore the classic global names used throughout this code.
+#include <boost/bind/placeholders.hpp>
+using namespace boost::placeholders;
 #include <boost/asio/ip/v6_only.hpp>
 #include <boost/asio/ssl.hpp>
 #include <boost/bind.hpp>
@@ -466,7 +471,7 @@ static void RPCListen(boost::shared_ptr< basic_socket_acceptor<Protocol> > accep
                    const bool fUseSSL)
 {
     // Accept connection
-    AcceptedConnectionImpl<Protocol>* conn = new AcceptedConnectionImpl<Protocol>(acceptor->get_io_service(), context, fUseSSL);
+    AcceptedConnectionImpl<Protocol>* conn = new AcceptedConnectionImpl<Protocol>(*rpc_io_service, context, fUseSSL);
 
     acceptor->async_accept(
             conn->sslStream.lowest_layer(),

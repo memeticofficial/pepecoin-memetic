@@ -15,6 +15,11 @@
 #include <boost/function.hpp>
 #include <boost/version.hpp>
 
+// Boost >= 1.73 moved the bind placeholders (_1.._9) out of the global
+// namespace; restore the classic global names used by this template.
+#include <boost/bind/placeholders.hpp>
+using namespace boost::placeholders;
+
 #if BOOST_VERSION >= 103800
     #include <boost/spirit/include/classic_core.hpp>
     #include <boost/spirit/include/classic_confix.hpp>

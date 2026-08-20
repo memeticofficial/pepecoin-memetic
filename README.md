@@ -1,18 +1,20 @@
+Note: PepeCoin / Memetic was bridged to an Ethereum ERC-20 token in 2023. See links on [https://linktr.ee/pepecoins](https://linktr.ee/pepecoins) for more information.
+
 ***
 # PepeCoin - PEPE  / Memetic - MEME
 #### v. 3.1.1.0
 
-Memetic, also known as PepeCoin, is a digital decentralized crypto-currency, listed as as Memetic / MEME on Bittrex, Upbit, Coinmarkets, and CoinMarketCap.
+PepeCoin, also known as Memetic, launched in 2016, is a digital decentralized crypto-currency, listed as as Memetic / MEME on Bittrex, Upbit, Coinmarkets, and CoinMarketCap, due to political pressure in 2016.
 
 Memetic, AKA PepeCoin, incorporates both blockchain 2.0 and blockchain 3.0 technologies and is under continued development.
 
-Memetic / Pepecoin is a Proof of Stake (POS) cryptocurrency with privacy features and masternode technology. Mastertoad (masternode) and stakers are rewarded for processing transactions and collectively ensuring the security of the network.
+Pepecoin / Memetic is a Proof of Stake (POS) cryptocurrency with privacy features and masternode technology. Mastertoad (masternode) and stakers are rewarded for processing transactions and collectively ensuring the security of the network.
 
 Previously, we were a Proof of Stake and Proof of Work hybrid but due to the rise of 51% attacks we have shifted to POS until more technology improvements are discovered.
 
-Memetic / PepeCoin is decentralized, encrypted image storage in IPFS, cryptographically verified against the PepeCoin blockchain. Protect your memes and political information from censorship.
+Pepecoin / Memetic is decentralized, encrypted image storage in IPFS, cryptographically verified against the PepeCoin blockchain. Protect your memes and political information from censorship.
 
-Memetic / PepeCoin is the base infrastructure for the Kekdaq decentralized meme asset exchange.
+Pepecoin / Memetic is the base infrastructure for the Kekdaq decentralized meme asset exchange.
 
 PepeCoin is a fully open source, decentralized, encrypted project that supports the preservation of all freedom of speech that is within the bounds of US law.
 

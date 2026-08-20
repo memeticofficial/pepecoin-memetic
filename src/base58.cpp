@@ -47,7 +47,7 @@ bool DecodeBase58(const char* psz, std::vector<unsigned char>& vchRet) {
             break;
         }
         bnChar.setulong(p1 - pszBase58);
-        if (!BN_mul(&bn, &bn, &bn58, pctx))
+        if (!BN_mul(bn.get(), bn.get(), bn58.get(), pctx))
             throw bignum_error("DecodeBase58 : BN_mul failed");
         bn += bnChar;
     }
@@ -60,10 +60,7 @@ bool DecodeBase58(const char* psz, std::vector<unsigned char>& vchRet) {
         vchTmp.erase(vchTmp.end()-1);
 
     // Restore leading zeros
-    int nLeadingZeros = 0;
-    for (const char* p = psz; *p == pszBase58[0]; p++)
-        nLeadingZeros++;
-    vchRet.assign(nLeadingZeros + vchTmp.size(), 0);
+    vchRet.assign(zeroes + vchTmp.size(), 0);
 
     // Convert little endian data to big endian
     reverse_copy(vchTmp.begin(), vchTmp.end(), vchRet.end() - vchTmp.size());
